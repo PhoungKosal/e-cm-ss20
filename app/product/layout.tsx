@@ -17,11 +17,12 @@ export default function RootLayoutPage({
             <CartProvider>
                 <Header/>
                 <main
-                    className="mb-5 mt-20 px-8 overflow-y-auto overflow-x-hidden items-center justify-center">
+                    className="flex-grow mb-5 mt-10 px-8 overflow-y-auto overflow-x-hidden flex items-center justify-center h-fit">
                     {children}
                 </main>
                 <Footer/>
             </CartProvider>
         </main>
+
     );
 }

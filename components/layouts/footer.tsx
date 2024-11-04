@@ -5,7 +5,7 @@ import font from "../../app/fonts";
 
 export default function Footer() {
     return (
-        <footer className="bg-gray-800 text-white py-6">
+        <footer className="w-full h-auto py-3 bg-gray-800 text-white ">
             <div
                 className="container mx-auto py-4 xl:px-40 flex flex-col md:flex-row justify-between items-center md:items-start">
                 {/* Left section: Logo and description */}

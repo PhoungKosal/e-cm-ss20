@@ -1,8 +1,8 @@
 import Image from "next/image";
 import React from "react";
-import {Button} from "@/components/ui/button";
 import Link from "next/link";
 import {CardProps} from "@/types";
+import {ShoppingBag} from "lucide-react";
 
 const Card: React.FC<CardProps> = ({image, title, rating, price, offer, onAddToCart, link}) => {
     return (
@@ -50,7 +50,8 @@ const Card: React.FC<CardProps> = ({image, title, rating, price, offer, onAddToC
                 </div>
                 <div className="flex items-center justify-between">
                     <span className="text-2xl font-bold text-gray-900 dark:text-white">${price}</span>
-                    <Button onClick={onAddToCart}>Add to Card</Button>
+                    {/*<Button onClick={onAddToCart}>Add to Card</Button>*/}
+                    <ShoppingBag onClick={onAddToCart} size={35} color="orange" className="cursor-pointer"/>
                 </div>
             </div>
         </div>

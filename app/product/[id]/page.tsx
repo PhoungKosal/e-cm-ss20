@@ -37,11 +37,19 @@ const Page: React.FC<PageProps> = ({params}) => {
     }
 
     return (
-        <div>
-            <ProductDetail image={data?.image} title={data?.title} rating={data?.rating.count}
-                           price={data?.price}
-                           onAddToCart={() => addItem(cartItems)}/>
+        <div className="bg-white py-8 antialiased dark:bg-gray-900 md:py-16 w-full ">
+            <div className="mx-auto max-w-screen-xl">
+                <div className="mx-auto max-w-full space-y-8">
+                    <h2 className="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">Product in Cart</h2>
+                    <div>
+                        <ProductDetail image={data?.image} title={data?.title} rating={data?.rating.count}
+                                       price={data?.price}
+                                       onAddToCart={() => addItem(cartItems)}/>
+                    </div>
+                </div>
+            </div>
         </div>
+
     );
 };
 

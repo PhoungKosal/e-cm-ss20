@@ -20,7 +20,7 @@ const HomePage = () => {
     if (isLoading) return <SpinLoading/>;
     if (error) return <div>Error: {(error as Error).message}</div>;
     return (
-        <div className="mx-auto max-w-2xl  sm:px-0 sm:py-0 lg:max-w-7xl lg:px-8 lg:py-16">
+        <div className="bg-white py-12 antialiased dark:bg-gray-900 md:py-16 ">
             <section>
                 <Image src={Product.headphones} alt="loog"/>
                 <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 text-center mb-8">Customers also

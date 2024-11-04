@@ -27,11 +27,43 @@ export interface User {
 }
 
 export interface CardProps {
-    image: string;          // URL of the product image
-    title: string;          // Title of the product
-    rating: number;         // Rating of the product (out of 5)
-    price: number;          // Price of the product
-    offer?: string;         // Optional promotional offer text
-    link?: number;          // Optional link to the product page
-    onAddToCart?: () => void; // Function to call when the "Add to cart" button is clicked
+    image: string;
+    title: string;
+    rating: number;
+    price: number;
+    offer?: string;
+    link?: number;
+    onAddToCart?: () => void;
+    incrementCart?: () => void;
+    decrementCart?: () => void;
+    deleteItem?: () => void;
 }
+
+export interface CartItem {
+    id: number;
+    name: string;
+    price: number;
+    quantity: number;
+    imageUrl: string;
+}
+
+
+export interface CartContextType {
+    items: CartItem[];
+    totalAmount: number;
+    addItem: (item: CartItem) => void;
+    removeItem: (id: number) => void;
+    itemQuantity: number;
+    incrementQuantity: (id: number) => void;
+    decrementQuantity: (id: number) => void;
+    products: CartItem[];
+    cart: boolean;
+}
+
+
+export type Action =
+    | { type: 'SET_ITEMS'; payload: CartItem[] }
+    | { type: 'ADD_ITEM'; payload: CartItem }
+    | { type: 'REMOVE_ITEM'; payload: number }
+    | { type: 'INCREMENT_QUANTITY'; payload: number }
+    | { type: 'DECREMENT_QUANTITY'; payload: number };

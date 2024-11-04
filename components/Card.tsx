@@ -4,13 +4,10 @@ import {Button} from "@/components/ui/button";
 import Link from "next/link";
 import {CardProps} from "@/types";
 
-// Define the props interface
-
-
 const Card: React.FC<CardProps> = ({image, title, rating, price, offer, onAddToCart, link}) => {
     return (
-        <Link href={link ? `/product/${link}` : "#"}
-              className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800
+        <div
+            className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800
             dark:border-gray-700">
             <div className="relative h-52 w-full overflow-hidden rounded-lg">
                 {offer && (
@@ -19,12 +16,14 @@ const Card: React.FC<CardProps> = ({image, title, rating, price, offer, onAddToC
                         {offer}
                     </span>
                 )}
-                <Image
-                    src={image}
-                    alt={title}
-                    layout="fill" // Ensures the image fills the container
-                    className="object-contain"
-                />
+                <Link href={link ? `/product/${link}` : "#"}>
+                    <Image
+                        src={image}
+                        alt={title}
+                        layout="fill" // Ensures the image fills the container
+                        className="object-contain"
+                    />
+                </Link>
             </div>
             <div className="px-3 pb-3">
                 <div>
@@ -52,15 +51,9 @@ const Card: React.FC<CardProps> = ({image, title, rating, price, offer, onAddToC
                 <div className="flex items-center justify-between">
                     <span className="text-2xl font-bold text-gray-900 dark:text-white">${price}</span>
                     <Button onClick={onAddToCart}>Add to Card</Button>
-                    {/*<button*/}
-                    {/*    onClick={onAddToCart}*/}
-                    {/*    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-1.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"*/}
-                    {/*>*/}
-                    {/*    Add*/}
-                    {/*</button>*/}
                 </div>
             </div>
-        </Link>
+        </div>
     );
 };
 

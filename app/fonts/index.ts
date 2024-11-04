@@ -19,7 +19,6 @@ const inter = Inter({
     weight: "500",
 });
 
-// Assign fonts to an object and export it as the default
 const fonts = {roboto_mono, poppins, koulen, inter};
 
 export default fonts;

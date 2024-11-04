@@ -2,6 +2,7 @@ import React from "react";
 import Footer from "@/components/layouts/footer";
 import Header from "@/components/layouts/header";
 import type {Metadata} from "next";
+import {CartProvider} from "@/contexts/cart-context";
 
 export const metadata: Metadata = {
     title: "Create Next App",
@@ -13,12 +14,14 @@ export default function RootLayoutPage({
                                        }: Readonly<{ children: React.ReactNode }>) {
     return (
         <main className="w-full min-h-screen flex flex-col">
-            <Header/>
-            <main
-                className="mb-5 mt-20 px-8 overflow-y-auto overflow-x-hidden items-center justify-center">
-                {children}
-            </main>
-            <Footer/>
+            <CartProvider>
+                <Header/>
+                <main
+                    className="mb-5 mt-20 px-8 overflow-y-auto overflow-x-hidden items-center justify-center">
+                    {children}
+                </main>
+                <Footer/>
+            </CartProvider>
         </main>
     );
 }

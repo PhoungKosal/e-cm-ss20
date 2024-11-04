@@ -73,12 +73,15 @@ export const verifyAuthToken = async (token: string) => {
 
 
 export const getAllUsers = async () => {
+    // await new Promise((resolve) => setTimeout(resolve, 5000));
     const res = await fetch('https://fakestoreapi.com/products');
     return res.json();
 }
 
 
 export const getProductID = async (id: number) => {
+    // add time 3000ms
+    // await new Promise((resolve) => setTimeout(resolve, 5000));
     const res = await fetch(`https://fakestoreapi.com/products/${id}`);
     return res.json();
 }

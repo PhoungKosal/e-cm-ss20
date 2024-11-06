@@ -50,8 +50,8 @@ const Card: React.FC<CardProps> = ({image, title, rating, price, offer, onAddToC
                 </div>
                 <div className="flex items-center justify-between">
                     <span className="text-2xl font-bold text-gray-900 dark:text-white">${price}</span>
-                    {/*<Button onClick={onAddToCart}>Add to Card</Button>*/}
-                    <ShoppingBag onClick={onAddToCart} size={35} color="orange" className="cursor-pointer"/>
+                    <ShoppingBag onClick={onAddToCart} size={35} color="#0f56e4"
+                                 className="cursor-pointer transform hover:scale-110 transition-transform duration-200"/>
                 </div>
             </div>
         </div>

@@ -1,7 +1,13 @@
 import {PaymentMethod} from "@/components/payment-method";
 import PaymentSummary from "@/components/payment-summary";
+import {Metadata} from "next";
 
-const PaymentPage = () => {
+export const metadata: Metadata = {
+    title: "Payment",
+    description: "Payment page",
+}
+
+const PaymentPage = async () => {
     return (
         <div className="bg-white py-8 antialiased dark:bg-gray-900 md:py-16 ">
             <div className="mx-auto max-w-screen-xl">

@@ -1,64 +1,76 @@
 "use client";
 import React from "react";
-import {CardProps} from "@/types";
 import {Button} from "@/components/ui/button";
 import Image from "next/image";
+import {CartItem} from "@/types";
+import {useCartContext} from "@/contexts/cart-context";
+import {useQuery} from "@tanstack/react-query";
+import {getProductID} from "@/app/server/actions/auth";
 
-export const ProductDetail: React.FC<CardProps> = ({
-                                                       image,
-                                                       title,
-                                                       rating,
-                                                       price,
-                                                       offer,
-                                                       onAddToCart,
-                                                   }) => {
+export const ProductDetail = ({id}: { id: number }) => {
+    const {data, isLoading} = useQuery({
+        queryKey: ['product', id],
+        queryFn: () => getProductID(id),
+        enabled: !!id,
+    });
+
+    const {addItem} = useCartContext();
+    const cartItems: CartItem = {
+        id: data?.id,
+        title: data?.title,
+        price: data?.price,
+        quantity: 1,
+        image: data?.image,
+    }
+    if (isLoading) {
+        return (
+            <div
+                className="flex flex-col lg:flex-row bg-white rounded-lg shadow-lg p-6 space-y-6 lg:space-y-0 lg:space-x-8 animate-pulse">
+                <div
+                    className="relative h-52 w-full lg:w-1/3 overflow-hidden rounded-lg bg-gray-200 dark:bg-gray-700"></div>
+                <div className="w-full lg:w-2/3 flex flex-col justify-between space-y-4">
+                    <div className="space-y-4">
+                        <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-3/4"></div>
+                        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/2"></div>
+                        <div className="space-y-2">
+                            <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full"></div>
+                            <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-5/6"></div>
+                            <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4"></div>
+                        </div>
+                        <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-1/3"></div>
+                    </div>
+                    <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded w-full"></div>
+                </div>
+            </div>
+        )
+    }
     return (
 
         <div
             className="flex flex-col lg:flex-row bg-white rounded-lg shadow-lg p-6 space-y-6 lg:space-y-0 lg:space-x-8">
-            <div className="w-full lg:w-1/3 flex justify-center">
+            <div className="relative h-52 w-full lg:w-1/3 overflow-hidden rounded-lg">
                 <Image
-                    src={image}
-                    alt={title}
-                    width={500}
-                    height={500}
-                    className="rounded-lg object-cover"
+                    src={data?.image}
+                    alt={data?.title}
+                    layout="fill"
+                    className="object-contain"
                 />
             </div>
-
-            {/* Product Details Section */}
             <div className="w-full lg:w-2/3 flex flex-col justify-between">
-                <div>
-                    <h1 className="text-2xl font-bold text-gray-900">{title}</h1>
-
-                    {/* Rating Section */}
-                    {rating && (
-                        <div className="text-gray-600 mt-2 text-sm md:text-base">
-                            <span>Rating: {rating} ⭐</span>
-                            <span> ({rating} reviews)</span>
+                <div className="space-y-4">
+                    <h1 className="text-2xl font-bold text-gray-900">{data?.title}</h1>
+                    {data?.rating && (
+                        <div className="text-gray-600 text-sm md:text-base">
+                            <span>Rating: {data?.rating?.rate} ⭐</span>
+                            <span> ({data?.rating?.count} reviews)</span>
                         </div>
                     )}
-
-                    {/* Price Section */}
-                    <div className="flex items-center mt-4">
-                        {offer && (
-                            <span className="text-gray-500 line-through mr-2 text-lg">
-                        ${offer}
-                    </span>
-                        )}
-                        {price && (
-                            <span className="text-orange-500 text-xl md:text-2xl font-bold">
-                        ${price.toFixed(2)}
-                    </span>
-                        )}
+                    <p className="text-gray-700">{data?.description}</p>
+                    <div className="text-orange-500 text-xl md:text-2xl font-bold">
+                        ${data?.price.toFixed(2)}
                     </div>
                 </div>
-
-                {/* Add to Cart Button */}
-                <Button
-                    onClick={onAddToCart}
-                    variant="default"
-                >
+                <Button onClick={() => addItem(cartItems)} variant="default">
                     Add to Cart
                 </Button>
             </div>

@@ -1,6 +1,12 @@
 import Image from "next/image";
 import image from "@/public";
 import {LoginForm} from "@/components/auth-form/login-form";
+import {Metadata} from "next";
+
+export const metadata: Metadata = {
+    title: "Login",
+    description: "Login to your account",
+}
 
 export default function LoginPage() {
     return (
@@ -16,7 +22,6 @@ export default function LoginPage() {
                     />
                 </div>
             </div>
-            {/* Form Login */}
             <LoginForm/>
         </div>
     );

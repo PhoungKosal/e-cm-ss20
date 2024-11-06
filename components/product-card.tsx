@@ -5,14 +5,14 @@ import Image from "next/image";
 import {SquareMinus, SquarePlus} from "lucide-react";
 
 
-const ProductCard: React.FC<CartItem> = ({id, name, imageUrl, price, quantity}) => {
+const ProductCard: React.FC<CartItem> = ({id, title, image, price, quantity}) => {
     const {incrementQuantity, decrementQuantity, removeItem} = useCartContext();
     return (
         <div
             className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 md:p-6 ">
             <div className="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
                 <a href="#" className="shrink-0 md:order-1">
-                    <Image src={imageUrl} alt={`${name} image`} width={70}
+                    <Image src={image} alt={`${title} image`} width={70}
                            height={150}/>
                 </a>
 
@@ -30,7 +30,7 @@ const ProductCard: React.FC<CartItem> = ({id, name, imageUrl, price, quantity}) 
                             value={quantity}
                             readOnly
                         />
-                        <SquarePlus onClick={() => incrementQuantity(id)} size={25} color="green"
+                        <SquarePlus onClick={() => incrementQuantity(id)} size={25} color="#0f56e4"
                                     className="cursor-pointer"/>
                     </div>
                     <div className="text-end md:order-4 md:w-32">
@@ -41,9 +41,9 @@ const ProductCard: React.FC<CartItem> = ({id, name, imageUrl, price, quantity}) 
                 <div className="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
                     <a href="#"
                        className="text-base font-medium text-gray-900 hover:underline dark:text-white">
-                        {name}
+                        {title}
                     </a>
-                    
+
                     <div className="items-center gap-4">
                         <button
                             type="button"

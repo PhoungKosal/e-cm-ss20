@@ -11,7 +11,6 @@ import {useCartContext} from "@/contexts/cart-context";
 
 export default function Header() {
     const {itemQuantity, cart} = useCartContext();
-    console.log(cart)
     return (
         <header className="bg-white border-b text-black py-3 fixed top-0 left-0 w-full z-50 shadow-md">
             <div className="flex justify-between items-center mx-auto max-w-screen-xl px-4">
@@ -44,17 +43,19 @@ export default function Header() {
                     />
                 </div>
 
-                <Link href="/product/cart" className="flex items-center justify-center space-x-3">
-                    <div className="relative">
-                        <ShoppingBag size={24}/>
+                <div className="flex items-center justify-center space-x-2">
+                    <Link href="/product/cart"
+                          className="relative">
+                        <ShoppingBag size={24} color="#0f56e4"
+                                     className="cursor-pointer transform hover:scale-110 transition-transform duration-200"/>
                         {cart && (<span
                             className="absolute -top-1 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">{itemQuantity}</span>)}
-                    </div>
+                    </Link>
                     <Avatar>
                         <AvatarImage src="https://github.com/shadcn.png"/>
                         <AvatarFallback>CN</AvatarFallback>
                     </Avatar>
-                </Link>
+                </div>
             </div>
         </header>
     );

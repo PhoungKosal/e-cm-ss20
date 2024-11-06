@@ -1,56 +1,31 @@
-"use client";
 import React from 'react';
-import {useQuery} from '@tanstack/react-query';
-import {getProductID} from '@/app/server/actions/auth';
 import ProductDetail from "@/components/ProductDetail";
-import SpinLoading from "@/app/product/loading";
-import {useCartContext} from "@/contexts/cart-context";
-import {CartItem} from "@/types";
 
 interface PageProps {
     params: Promise<{ id: number }>;
 }
 
-const Page: React.FC<PageProps> = ({params}) => {
-    const {id} = React.use(params);
-    const {data, error, isLoading} = useQuery({
-        queryKey: ['product', id],
-        queryFn: () => getProductID(id),
-        enabled: !!id,
-    });
+export async function generateMetadata({params}: PageProps) {
+    const {id} = await params;
+    return {
+        title: `Product Detail - ${id}`,
+        description: "Product Detail",
+    };
+}
 
-    const cartItems: CartItem = {
-        id: id,
-        name: data?.title,
-        price: data?.price,
-        quantity: 1,
-        imageUrl: data?.image,
-    }
-    const {addItem} = useCartContext();
-
-    if (isLoading) {
-        return <SpinLoading/>;
-    }
-
-    if (error) {
-        return <div>Error: {error.message}</div>;
-    }
-
+const DetailPage = async ({params}: PageProps) => {
+    const {id} = await params;
     return (
-        <div className="bg-white py-8 antialiased dark:bg-gray-900 md:py-16 w-full ">
+        <div className="bg-white py-8 antialiased dark:bg-gray-900 md:py-16 w-full">
             <div className="mx-auto max-w-screen-xl">
                 <div className="mx-auto max-w-full space-y-8">
-                    <h2 className="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">Product in Cart</h2>
+                    <h2 className="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">Product Detail</h2>
                     <div>
-                        <ProductDetail image={data?.image} title={data?.title} rating={data?.rating.count}
-                                       price={data?.price}
-                                       onAddToCart={() => addItem(cartItems)}/>
+                        <ProductDetail id={id}/>
                     </div>
                 </div>
             </div>
         </div>
-
     );
 };
-
-export default Page;
+export default DetailPage;

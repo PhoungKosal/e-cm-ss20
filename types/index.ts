@@ -27,6 +27,7 @@ export interface User {
 }
 
 export interface CardProps {
+    id: number;
     image: string;
     title: string;
     rating: number;
@@ -41,10 +42,15 @@ export interface CardProps {
 
 export interface CartItem {
     id: number;
-    name: string;
+    title: string;
+    description?: string;
     price: number;
+    image: string;
     quantity: number;
-    imageUrl: string;
+    rating?: {
+        rate: number;
+        count: number;
+    }
 }
 
 

@@ -11,10 +11,14 @@ const ProductCard: React.FC<CartItem> = ({id, title, image, price, quantity}) =>
         <div
             className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 md:p-6 ">
             <div className="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
-                <a href="#" className="shrink-0 md:order-1">
-                    <Image src={image} alt={`${title} image`} width={70}
-                           height={150}/>
-                </a>
+                <div className="relative w-1/3 h-32 overflow-hidden rounded-lg">
+                    <Image
+                        src={image}
+                        alt={title}
+                        layout="fill"
+                        className="object-contain"
+                    />
+                </div>
 
                 <label htmlFor={`counter-input-${id}`} className="sr-only">
                     Choose quantity:

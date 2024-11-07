@@ -26,6 +26,7 @@ export function LoginForm() {
                             id="email"
                             name="email"
                             type="email"
+                            defaultValue="phoungkosal02@gmail.com"
                             placeholder="m@example.com"
                             required
 
@@ -35,7 +36,7 @@ export function LoginForm() {
                         <div className="flex items-center">
                             <Label htmlFor="password">Password</Label>
                             <Link
-                                href="/forgot-password"
+                                href=""
                                 className="ml-auto inline-block text-sm underline"
                             >
                                 Forgot your password?
@@ -46,13 +47,12 @@ export function LoginForm() {
                             name="password"
                             type="password"
                             placeholder="Password"
+                            defaultValue="12345"
                             required
                         />
                     </div>
                     {data?.error && <span className="text-red-500">{data?.error}</span>}
                     {data?.message && <span>{data.message}</span>}
-                    {/*{data?.FieldData?.email && <span>{data.FieldData.email}</span>}*/}
-
                     <Button type="submit" className="w-full" disabled={isPending}>
                         {isPending ? (<Loader className="mr-2 h-4 w-4 animate-spin"/>) : "Login"}
                     </Button>

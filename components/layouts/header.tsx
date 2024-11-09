@@ -4,15 +4,26 @@ import Image from "next/image";
 import image from "@/public";
 import {Input} from "../ui/input";
 import {Menu, ShoppingBag} from 'lucide-react';
-import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
+import {Avatar, AvatarFallback} from "@/components/ui/avatar";
 import SheetForm from "@/components/SheetDemo";
 import Link from "next/link";
 import {useCartContext} from "@/contexts/cart-context";
+import AccountInfo from "@/components/accoung-info";
+import {logoutUser} from "@/app/server/actions/auth";
+import {userType} from "@/types";
+import {useQuery} from "@tanstack/react-query";
+import {ModeToggle} from "@/components/togle-dark-mode";
+import {getAllCategories} from "@/app/server/actions/product";
 
-export default function Header() {
+export default function Header({user}: { user: userType }) {
     const {itemQuantity, cart} = useCartContext();
+    const [isLogin, setIsLogin] = React.useState(true);
+    React.useEffect(() => (
+        setIsLogin(!!user)
+    ), [user]);
     return (
-        <header className="bg-white border-b text-black py-3 fixed top-0 left-0 w-full z-50 shadow-md">
+        <header
+            className=" w-screen bg-gray-50 border-b text-black py-3 fixed top-0 left-0  z-50 shadow-md dark:bg-slate-700">
             <div className="flex justify-between items-center mx-auto max-w-screen-xl px-4">
                 <div className="lg:hidden">
                     <SheetForm id="1" title={<Image src={image.tinh_serey}
@@ -21,10 +32,10 @@ export default function Header() {
                                                     alt="logo"
                                                     className="object-contain mx-auto"/>}
                                description="welcome to ss20 store"
-                               Trigger={<Menu size={24}/>}
-                               form={<Input placeholder="Search..."/>}
+                               Trigger={<Menu size={24} className="dark:text-white"/>}
+                               form={<SideBarSearch/>}
                                side="left"
-                               footer="skdjfkdsjkfj"/>
+                               footer="sfjlsdjflkjfdsjlk"/>
                 </div>
                 <div className="flex-shrink-0">
                     <Link href="/product">
@@ -40,23 +51,49 @@ export default function Header() {
                 <div className="w-[50%] lg:block hidden">
                     <Input
                         placeholder="Search..."
+                        className="dark:bg-gray-200 dark:text-black"
                     />
                 </div>
 
                 <div className="flex items-center justify-center space-x-2">
+                    <div className="dark:text-white">
+                        <ModeToggle/>
+                    </div>
                     <Link href="/product/cart"
                           className="relative">
-                        <ShoppingBag size={24} color="#0f56e4"
-                                     className="cursor-pointer transform hover:scale-110 transition-transform duration-200"/>
+                        <ShoppingBag size={24}
+                                     className="cursor-pointer transform hover:scale-110 transition-transform duration-200 text-blue-800 dark:text-white"/>
                         {cart && (<span
                             className="absolute -top-1 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">{itemQuantity}</span>)}
                     </Link>
-                    <Avatar>
-                        <AvatarImage src="https://github.com/shadcn.png"/>
-                        <AvatarFallback>CN</AvatarFallback>
-                    </Avatar>
+                    {isLogin ? (<AccountInfo trigger={<Avatar>
+                        <AvatarFallback
+                            className="dark:bg-white dark:text-gray-800">{user?.firstname[0]}</AvatarFallback>
+                    </Avatar>} label="My Account" item3="Logout" action={() => logoutUser()}/>) : (
+                        <Link href={'/auth/login'}>Login</Link>)}
                 </div>
             </div>
         </header>
     );
 }
+
+
+const SideBarSearch = () => {
+    const {data} = useQuery({
+        queryKey: ['categories'],
+        queryFn: getAllCategories
+    });
+    return (
+        <div className="space-y-8">
+            <Input id={'search'} placeholder="Search..."/>
+            <div className="flex flex-row items-center justify-between">
+                <div className="flex flex-col justify-center items-center space-y-5">
+                    {data}
+                </div>
+                <div className="flex flex-col justify-center items-center space-y-5">
+                </div>
+            </div>
+        </div>
+    )
+}
+export {SideBarSearch};

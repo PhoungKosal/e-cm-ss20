@@ -1,7 +1,7 @@
 "use client";
+import React from "react";
 import {useCartContext} from "@/contexts/cart-context";
 import ProductCard from "@/components/product-card";
-import React from "react";
 
 const ProductCart = () => {
     const {products} = useCartContext();
@@ -10,11 +10,11 @@ const ProductCart = () => {
             {products && products.length > 0 ? (
                 products.map((product) => (
                     <ProductCard
-                        key={product.id}
-                        id={product.id}
-                        price={product.price}
-                        title={product.title}
-                        image={product.image}
+                        key={product?.id}
+                        id={product?.id}
+                        price={product?.price}
+                        title={product?.title}
+                        image={product?.image}
                         quantity={product.quantity}
                     />
                 ))

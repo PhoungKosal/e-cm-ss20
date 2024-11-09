@@ -2,9 +2,10 @@
 import {useCartContext} from "@/contexts/cart-context";
 import {useQuery} from "@tanstack/react-query";
 import {ProductType} from "@/types";
-import {getAllProducts} from "@/app/server/actions/auth";
+
 import React from "react";
 import Card from "@/components/Card";
+import {getAllProducts} from "@/app/server/actions/product";
 
 const ProductPage = () => {
     const {addItem} = useCartContext()
@@ -42,7 +43,7 @@ const ProductPage = () => {
                     link={item.id}
                     key={item.id}
                     image={item.image}
-                    title={item.title}
+                    title={item.title.split(" ").slice(0, 4).join(" ")}
                     rating={item.rating.rate}
                     price={item.price}
                     onAddToCart={() => addItem({

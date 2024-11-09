@@ -4,7 +4,6 @@ import {useCartContext} from "@/contexts/cart-context";
 import Image from "next/image";
 import {SquareMinus, SquarePlus} from "lucide-react";
 
-
 const ProductCard: React.FC<CartItem> = ({id, title, image, price, quantity}) => {
     const {incrementQuantity, decrementQuantity, removeItem} = useCartContext();
     return (
@@ -47,7 +46,6 @@ const ProductCard: React.FC<CartItem> = ({id, title, image, price, quantity}) =>
                        className="text-base font-medium text-gray-900 hover:underline dark:text-white">
                         {title}
                     </a>
-
                     <div className="items-center gap-4">
                         <button
                             type="button"

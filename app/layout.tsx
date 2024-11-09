@@ -4,6 +4,7 @@ import type {Metadata} from "next";
 import font from "../app/fonts";
 import "../app/globals.css";
 import TanstackProvider from "@/components/providers/tanstack-provider";
+import {ThemeProvider} from "@/components/themes/theme-provider";
 
 export const metadata: Metadata = {
     title: {
@@ -22,16 +23,16 @@ export default function RootLayout({
         <html lang="en" suppressHydrationWarning>
         <body className={font.poppins.className}>
         <div>
-            {/*<ThemeProvider*/}
-            {/*    attribute="class"*/}
-            {/*    defaultTheme="dark"*/}
-            {/*    enableSystem*/}
-            {/*    disableTransitionOnChange*/}
-            {/*>*/}
-            {/*</ThemeProvider>*/}
-            <TanstackProvider>
-                {children}
-            </TanstackProvider>
+            <ThemeProvider
+                attribute="class"
+                defaultTheme="light"
+                enableSystem
+                disableTransitionOnChange
+            >
+                <TanstackProvider>
+                    {children}
+                </TanstackProvider>
+            </ThemeProvider>
         </div>
         </body>
         </html>

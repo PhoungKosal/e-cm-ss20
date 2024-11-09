@@ -43,6 +43,12 @@ export async function loginUser(previousState: unknown, formData: FormData) {
     return {message: "Login successful"};
 }
 
+export async function logoutUser() {
+    const cookiesStore = await cookies();
+    cookiesStore.delete("auth");
+    return redirect("/auth/login");
+}
+
 export async function getCurrentUser() {
     const userId = await getTokenUser();
     const res = await get(`api/user/${userId}`);
@@ -59,10 +65,10 @@ export async function getTokenUser() {
 export const verifyAuthToken = async (token: string) => {
     try {
         const decodedToken = jwt.decode(token) as JwtPayload;
-        if (!decodedToken || !decodedToken.id) {
-            throw new Error("Token is invalid or does not contain an ID");
-        }
-        return decodedToken.id;
+        // if (!decodedToken || !decodedToken.id) {
+        //     throw new Error("Token is invalid or does not contain an ID");
+        // }
+        return decodedToken?.id;
     } catch (error) {
         console.error("JWT decoding failed:", error);
         return {userId: null, error: "Invalid or expired token"}; // Return an error message
@@ -70,13 +76,3 @@ export const verifyAuthToken = async (token: string) => {
 }
 
 
-export const getAllProducts = async () => {
-    const res = await fetch('https://fakestoreapi.com/products');
-    return res.json();
-}
-
-
-export const getProductID = async (id: number) => {
-    const res = await fetch(`https://fakestoreapi.com/products/${id}`);
-    return res.json();
-}

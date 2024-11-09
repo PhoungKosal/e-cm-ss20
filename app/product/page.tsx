@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 }
 const HomePage = () => {
     return (
-        <div className="bg-white py-12 antialiased dark:bg-gray-900 md:py-16 ">
+        <div className="bg-white py-12 antialiased dark:bg-gray-700 md:py-16 ">
             <section className="w-full flex flex-col items-center justify-center">
                 <Image src={Product.headphones} alt="logo"/>
                 <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 text-center mb-8">Customers also

@@ -5,7 +5,7 @@ import Image from "next/image";
 import {CartItem} from "@/types";
 import {useCartContext} from "@/contexts/cart-context";
 import {useQuery} from "@tanstack/react-query";
-import {getProductID} from "@/app/server/actions/auth";
+import {getProductID} from "@/app/server/actions/product";
 
 export const ProductDetail = ({id}: { id: number }) => {
     const {data, isLoading} = useQuery({
@@ -47,7 +47,7 @@ export const ProductDetail = ({id}: { id: number }) => {
     return (
 
         <div
-            className="flex flex-col lg:flex-row bg-white rounded-lg shadow-lg p-6 space-y-6 lg:space-y-0 lg:space-x-8">
+            className="flex flex-col lg:flex-row bg-white rounded-lg shadow-lg p-6 space-y-6 lg:space-y-0 lg:space-x-8 dark:bg-gray-800 dark:border-gray-700">
             <div className="relative h-52 w-full lg:w-1/3 overflow-hidden rounded-lg">
                 <Image
                     src={data?.image}
@@ -58,14 +58,14 @@ export const ProductDetail = ({id}: { id: number }) => {
             </div>
             <div className="w-full lg:w-2/3 flex flex-col justify-between">
                 <div className="space-y-4">
-                    <h1 className="text-2xl font-bold text-gray-900">{data?.title}</h1>
+                    <h1 className="text-2xl font-bold text-gray-900 dark:text-white">{data?.title}</h1>
                     {data?.rating && (
-                        <div className="text-gray-600 text-sm md:text-base">
+                        <div className="text-gray-600 text-sm md:text-base dark:text-gray-300">
                             <span>Rating: {data?.rating?.rate} ⭐</span>
                             <span> ({data?.rating?.count} reviews)</span>
                         </div>
                     )}
-                    <p className="text-gray-700">{data?.description}</p>
+                    <p className="text-gray-700 dark:text-gray-300">{data?.description}</p>
                     <div className="text-orange-500 text-xl md:text-2xl font-bold">
                         ${data?.price.toFixed(2)}
                     </div>
@@ -75,7 +75,6 @@ export const ProductDetail = ({id}: { id: number }) => {
                 </Button>
             </div>
         </div>
-
     );
 };
 

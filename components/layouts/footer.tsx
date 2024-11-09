@@ -5,7 +5,7 @@ import font from "../../app/fonts";
 
 export default function Footer() {
     return (
-        <footer className="w-full h-auto py-3 bg-gray-800 text-white ">
+        <footer className="w-full h-auto pb-3 bg-gray-800 text-white ">
             <div
                 className="container mx-auto py-4 xl:px-40 flex flex-col md:flex-row justify-between items-center md:items-start space-y-5">
                 <div className="flex flex-col items-center text-center space-y-2">

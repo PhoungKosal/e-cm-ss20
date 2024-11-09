@@ -11,7 +11,7 @@ export interface ProductType {
     };
 }
 
-export interface User {
+export interface userType {
     _id: string;
     firstname: string;
     lastname: string;

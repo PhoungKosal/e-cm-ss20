@@ -13,7 +13,7 @@ export async function Payment(previousState: unknown, formData: FormData) {
         return {error: "Please fill all fields"};
     }
     console.log(name, cardNumber, expiryDate, year, cvc);
-    console.log("User Id: ", userId, "Order Items: ", order_items);
+    console.log("user Id: ", userId, "Order Items: ", order_items);
     order_items.split(",").map((item) => {
         console.log(item);
     })

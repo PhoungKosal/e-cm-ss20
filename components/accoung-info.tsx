@@ -10,6 +10,7 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import React from "react";
+import Link from "next/link";
 
 interface AccountInfoProps {
     trigger: React.ReactNode;
@@ -33,10 +34,12 @@ const AccountInfo = ({trigger, label, item3, action}: AccountInfoProps) => {
                     <DropdownMenuLabel>{label}</DropdownMenuLabel>
                     <DropdownMenuSeparator/>
                     <DropdownMenuGroup>
-                        <DropdownMenuItem>
-                            Profile
-                            <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
-                        </DropdownMenuItem>
+                        <Link href={"/profile"}>
+                            <DropdownMenuItem>
+                                Profile
+                                <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+                            </DropdownMenuItem>
+                        </Link>
                         <DropdownMenuItem>
                             Settings
                             <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>

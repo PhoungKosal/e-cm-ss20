@@ -16,10 +16,10 @@ export default async function RegisterPage() {
                 <div className="w-1/2 h-auto">
                     <Image
                         src={image.logo}
-                        alt="Image"
+                        alt="logo"
                         width="1920"
                         height="1080"
-                        className="object-cover dark:brightness-[0.2] dark:grayscale"
+                        className="object-contain mx-auto"
                     />
                 </div>
             </div>

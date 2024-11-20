@@ -5,13 +5,21 @@ import {ProductType} from "@/types";
 
 import React from "react";
 import Card from "@/components/Card";
-import {getAllProducts} from "@/app/server/actions/product";
+import {getAllProducts, getProductsBySearch} from "@/app/server/actions/product";
+import {useSearch} from "@/contexts/search-contex";
 
 const ProductPage = () => {
     const {addItem} = useCartContext()
+    const {search, searchQuery} = useSearch();
     const {data, error, isLoading} = useQuery<ProductType[]>({
-        queryKey: ['products'],
-        queryFn: getAllProducts
+        queryKey: ['products', search, searchQuery], // Query will re-fetch when search or searchQuery change
+        queryFn: () => {
+            if (search && searchQuery) {
+                return getProductsBySearch(searchQuery); // Fetch products based on search query
+            }
+            return getAllProducts(); // Fetch all products when no search
+        },
+
     });
 
     if (isLoading) {

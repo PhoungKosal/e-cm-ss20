@@ -2,18 +2,18 @@
 import React from "react";
 import Image from "next/image";
 import image from "@/public";
-import {Input} from "../ui/input";
 import {Menu, ShoppingBag} from 'lucide-react';
 import {Avatar, AvatarFallback} from "@/components/ui/avatar";
 import SheetForm from "@/components/SheetDemo";
 import Link from "next/link";
 import {useCartContext} from "@/contexts/cart-context";
 import AccountInfo from "@/components/accoung-info";
-import {logoutUser} from "@/app/server/actions/auth";
 import {userType} from "@/types";
 import {useQuery} from "@tanstack/react-query";
 import {ModeToggle} from "@/components/togle-dark-mode";
 import {getAllCategories} from "@/app/server/actions/product";
+import {Search} from "@/components/search-product";
+import {logoutUser} from "@/app/server/actions/auth";
 
 export default function Header({user}: { user: userType }) {
     const {itemQuantity, cart} = useCartContext();
@@ -49,10 +49,7 @@ export default function Header({user}: { user: userType }) {
                     </Link>
                 </div>
                 <div className="w-[50%] lg:block hidden">
-                    <Input
-                        placeholder="Search..."
-                        className="dark:bg-gray-200 dark:text-black"
-                    />
+                    <Search/>
                 </div>
 
                 <div className="flex items-center justify-center space-x-2">
@@ -68,7 +65,7 @@ export default function Header({user}: { user: userType }) {
                     </Link>
                     {isLogin ? (<AccountInfo trigger={<Avatar>
                         <AvatarFallback
-                            className="dark:bg-white dark:text-gray-800">{user?.firstname[0]}</AvatarFallback>
+                            className="dark:bg-white dark:text-gray-800">{user?.full_name[0]}</AvatarFallback>
                     </Avatar>} label="My Account" item3="Logout" action={() => logoutUser()}/>) : (
                         <Link href={'/auth/login'}>Login</Link>)}
                 </div>
@@ -85,7 +82,7 @@ const SideBarSearch = () => {
     });
     return (
         <div className="space-y-8">
-            <Input id={'search'} placeholder="Search..."/>
+            <Search/>
             <div className="flex flex-row items-center justify-between">
                 <div className="flex flex-col justify-center items-center space-y-5">
                     {data}

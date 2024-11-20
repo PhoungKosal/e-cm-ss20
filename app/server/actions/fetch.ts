@@ -12,6 +12,7 @@ export const get = async (path: string) => {
         method: "GET",
         headers: headers,
     });
-    
+    console.log(`${process.env.API_URL}/${path}`);
+
     return res.json();
 };

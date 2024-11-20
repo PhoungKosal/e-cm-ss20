@@ -23,7 +23,7 @@ export function PaymentMethod({user}: { user: userType }) {
         <Card
             className="w-full rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 sm:p-6 lg:max-w-xl lg:p-8">
             <form action={action}>
-                <input type="hidden" name="user_id" value={user._id}/>
+                <input type="hidden" name="user_id" value={user.id}/>
                 <input type="hidden" name="order_items" value={JSON.stringify({orderItems: orderItem}, null, 2)}/>
                 <CardHeader>
                     <CardTitle>Payment Method</CardTitle>

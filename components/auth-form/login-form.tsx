@@ -1,5 +1,5 @@
 "use client";
-import {loginUser} from "@/app/server/actions/auth";
+import {loginuser} from "@/app/server/actions/auth";
 
 import {useActionState} from "react";
 import {Label} from "@/components/ui/label";
@@ -9,7 +9,7 @@ import {Button} from "@/components/ui/button";
 import {Loader} from "lucide-react";
 
 export function LoginForm() {
-    const [data, action, isPending] = useActionState(loginUser, undefined);
+    const [data, action, isPending] = useActionState(loginuser, undefined);
     return (
         <div className="flex items-center justify-center">
             <div className="mx-auto grid w-[350px] gap-6">
@@ -26,8 +26,7 @@ export function LoginForm() {
                             id="email"
                             name="email"
                             type="email"
-                            defaultValue="phoungkosal02@gmail.com"
-                            placeholder="m@example.com"
+                            placeholder="yourmail@example.com"
                             required
 
                         />
@@ -47,7 +46,6 @@ export function LoginForm() {
                             name="password"
                             type="password"
                             placeholder="Password"
-                            defaultValue="12345"
                             required
                         />
                     </div>

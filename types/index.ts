@@ -12,18 +12,16 @@ export interface ProductType {
 }
 
 export interface userType {
-    _id: string;
-    firstname: string;
-    lastname: string;
+    id: string;
+    full_name: string;
     email: string;
-    mobile: string;
-    password: string;
     role: string;
-    isBlocked: boolean;
-    createdAt: string;
-    updatedAt: string;
-    __v: number;
-    refreshToken?: string;
+    gender: string;
+    phone: string;
+    address: string;
+    image: string;
+    is_active: boolean;
+    created_at: string;
 }
 
 export interface CardProps {

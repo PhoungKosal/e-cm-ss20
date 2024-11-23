@@ -6,7 +6,8 @@ export const getAllProducts = async () => {
 
 
 export const getProductID = async (id: number) => {
-    const res = await fetch(`https://fakestoreapi.com/products/${id}`);
+    const res = await fetch(`${process.env.API_URL}/api/products/products/${id}`);
+    console.log(`${process.env.API_URL}/api/products/products/${id}`)
     return res.json();
 }
 

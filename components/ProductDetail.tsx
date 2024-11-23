@@ -61,8 +61,8 @@ export const ProductDetail = ({id}: { id: number }) => {
                     <h1 className="text-2xl font-bold text-gray-900 dark:text-white">{data?.title}</h1>
                     {data?.rating && (
                         <div className="text-gray-600 text-sm md:text-base dark:text-gray-300">
-                            <span>Rating: {data?.rating?.rate} ⭐</span>
-                            <span> ({data?.rating?.count} reviews)</span>
+                            <span>Rating: {data?.rating} ⭐</span>
+                            {/*<span> ({data?.rating?.count} reviews)</span><span> ({data?.rating?.count} reviews)</span>*/}
                         </div>
                     )}
                     <p className="text-gray-700 dark:text-gray-300">{data?.description}</p>
